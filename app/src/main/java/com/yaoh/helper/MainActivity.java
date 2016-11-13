@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity{
 
         @Override
         public void onTabChanged(String s) {
-
+           setTitle(s);
         }
     }
 }
