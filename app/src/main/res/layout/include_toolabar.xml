@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:minHeight="?attr/actionBarSize"
-    android:paddingTop="20dp"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    android:minHeight="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/nav_left_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/icon_back_32px"
+        android:drawableStart="@drawable/icon_back_32px"
+        android:gravity="center"
+        android:text="返回"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="主页"
+        android:textSize="20sp"
+        android:textColor="@color/white" />
+
+</android.support.v7.widget.Toolbar>

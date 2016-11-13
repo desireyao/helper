@@ -7,12 +7,8 @@
         <item name="android:textColorPrimary">@color/colorAccent</item>
 
         !-- 窗口的背景颜色 -->
-        <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
 
     </style>
 

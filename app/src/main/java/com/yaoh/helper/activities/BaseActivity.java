@@ -1,6 +1,5 @@
 package com.yaoh.helper.activities;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +20,11 @@ public abstract  class BaseActivity extends AppCompatActivity{
         setContentView(getLayoutId());
 
         // 经测试在代码里直接声明透明状态栏更有效
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
-        initToolbar();
+//        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+//        }
+//        initToolbar();
 
         initData();
         initView();
@@ -39,7 +38,6 @@ public abstract  class BaseActivity extends AppCompatActivity{
 
 
     private void initToolbar() {
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
