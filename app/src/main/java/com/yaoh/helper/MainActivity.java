@@ -1,5 +1,6 @@
 package com.yaoh.helper;
 
+import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,19 +37,15 @@ public class MainActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void initView() {
-
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
         mTabHost.setOnTabChangedListener(new TabOnChangeListener());
-
         fragments.add(new FragmentTabOne());
         fragments.add(new FragmentTabTwo());
-
         for (int i = 0; i < fragments.size(); i++) {
             tabspec = mTabHost.newTabSpec(str_tabs[i]).setIndicator(tabIndicatorView(i));
             mTabHost.addTab(tabspec, fragments.get(i).getClass(), null);
