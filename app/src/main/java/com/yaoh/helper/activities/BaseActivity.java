@@ -1,5 +1,6 @@
 package com.yaoh.helper.activities;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import com.yaoh.helper.R;
 
 public abstract  class BaseActivity extends AppCompatActivity{
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public abstract  class BaseActivity extends AppCompatActivity{
 //            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
 //            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
 //        }
+        progressDialog = new ProgressDialog(this);
         initToolbar();
 
         initData();
@@ -38,6 +42,25 @@ public abstract  class BaseActivity extends AppCompatActivity{
 
     protected abstract void initView();
 
+    protected void showWaitDialog(){
+         if(progressDialog != null){
+             progressDialog.setMessage("正在加载数据中...");
+             progressDialog.show();
+         }
+    }
+
+    protected void showWaitDialog(String message) {
+        if (progressDialog != null) {
+            progressDialog.setMessage(message);
+            progressDialog.show();
+        }
+    }
+
+    protected void missDialog(){
+        if(progressDialog != null){
+            progressDialog.dismiss();
+        }
+    }
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
