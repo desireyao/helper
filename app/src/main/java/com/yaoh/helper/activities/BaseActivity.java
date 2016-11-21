@@ -25,13 +25,11 @@ public abstract  class BaseActivity extends AppCompatActivity{
         setContentView(getLayoutId());
 
 //        // 经测试在代码里直接声明透明状态栏更有效
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-//        }
-        progressDialog = new ProgressDialog(this);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
         initToolbar();
-
         initData();
         initView();
     }
@@ -41,26 +39,6 @@ public abstract  class BaseActivity extends AppCompatActivity{
     protected abstract void initData();
 
     protected abstract void initView();
-
-    protected void showWaitDialog(){
-         if(progressDialog != null){
-             progressDialog.setMessage("正在加载数据中...");
-             progressDialog.show();
-         }
-    }
-
-    protected void showWaitDialog(String message) {
-        if (progressDialog != null) {
-            progressDialog.setMessage(message);
-            progressDialog.show();
-        }
-    }
-
-    protected void missDialog(){
-        if(progressDialog != null){
-            progressDialog.dismiss();
-        }
-    }
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,5 +56,26 @@ public abstract  class BaseActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    protected void showWaitDialog(){
+        if(progressDialog == null){
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage("正在加载数据中...");
+        progressDialog.show();
+    }
+
+    protected void showWaitDialog(String message) {
+        if (progressDialog != null) {
+            progressDialog.setMessage(message);
+            progressDialog.show();
+        }
+    }
+
+    protected void missDialog(){
+        if(progressDialog != null){
+            progressDialog.dismiss();
+        }
     }
 }

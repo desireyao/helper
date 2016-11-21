@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity{
             tabspec = mTabHost.newTabSpec(str_tabs[i]).setIndicator(tabIndicatorView(i));
             mTabHost.addTab(tabspec, fragments.get(i).getClass(), null);
         }
-        showWaitDialog();
     }
 
     private View tabIndicatorView(int i) {
