@@ -1,6 +1,8 @@
 package com.yaoh.helper.activities;
 
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yaoh.helper.R;
+import com.yaoh.helper.utils.LogTool;
 
 /**
  * Created by yaoh on 2016/11/13.
@@ -53,11 +56,6 @@ public abstract  class BaseActivity extends AppCompatActivity{
         tv_title.setText(title);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     protected void showWaitDialog(){
         if(progressDialog == null){
             progressDialog = new ProgressDialog(this);
@@ -73,7 +71,7 @@ public abstract  class BaseActivity extends AppCompatActivity{
         }
     }
 
-    protected void missDialog(){
+    protected void dismissDialog(){
         if(progressDialog != null){
             progressDialog.dismiss();
         }

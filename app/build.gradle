@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+
     defaultConfig {
         applicationId "com.yaoh.helper"
         minSdkVersion 14
@@ -11,12 +12,62 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    productFlavors {
+        PublicServer {
+            applicationId "com.yaoh.helper"
+            versionCode 1
+            versionName "0.161122.1 Beta"
+            buildConfigField('int', 'VALUE_APP_TYPE', '0')
+            buildConfigField('String', 'VALUE_APP_ID', toJavaCodeString("10048"))
+            buildConfigField('String', 'HOST_M2M', toJavaCodeString("http://www.baidu.com"))
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+class Utils {
+    static def r = new Random(System.currentTimeMillis())
+}
+
+def String toJavaCodeString(String string) {
+    byte[] b = string.getBytes();
+    int c = b.length;
+    StringBuffer sb = new StringBuffer();
+
+    sb.append("new Object(){");
+    sb.append("int t;");
+    sb.append("public String toString() {");
+    sb.append("byte[] buf = new byte[");
+    sb.append(c);
+    sb.append("];");
+
+    for (int i = 0; i < c; ++i) {
+        int t = Utils.r.nextInt();
+        int f = Utils.r.nextInt(24) + 1;
+
+        t = (t & ~(0xff << f)) | (b[i] << f);
+
+        sb.append("t = ");
+        sb.append(t);
+        sb.append(";");
+        sb.append("buf[");
+        sb.append(i);
+        sb.append("] = (byte) (t >>> ");
+        sb.append(f);
+        sb.append(");");
+    }
+
+    sb.append("return new String(buf);");
+    sb.append("}}.toString()");
+
+    return sb.toString();
 }
 
 dependencies {

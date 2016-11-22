@@ -1,7 +1,7 @@
 package com.yaoh.helper;
 
-import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +12,15 @@ import com.yaoh.helper.activities.BaseActivity;
 import com.yaoh.helper.constants.Constants;
 import com.yaoh.helper.fragments.FragmentTabOne;
 import com.yaoh.helper.fragments.FragmentTabTwo;
+import com.yaoh.helper.utils.LogTool;
 import com.yaoh.helper.widget.FragmentTabHost;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity{
+
+    private static String TAG = "MainActivity";
 
     private FragmentTabHost mTabHost;  // 自定义的tabhost
     private TabHost.TabSpec tabspec;
@@ -37,6 +40,7 @@ public class MainActivity extends BaseActivity{
 
     @Override
     protected void initData() {
+
     }
 
     @Override
@@ -46,6 +50,7 @@ public class MainActivity extends BaseActivity{
         mTabHost.setOnTabChangedListener(new TabOnChangeListener());
         fragments.add(new FragmentTabOne());
         fragments.add(new FragmentTabTwo());
+
         for (int i = 0; i < fragments.size(); i++) {
             tabspec = mTabHost.newTabSpec(str_tabs[i]).setIndicator(tabIndicatorView(i));
             mTabHost.addTab(tabspec, fragments.get(i).getClass(), null);
@@ -53,14 +58,12 @@ public class MainActivity extends BaseActivity{
     }
 
     private View tabIndicatorView(int i) {
-
         View view = LayoutInflater.from(this).inflate(R.layout.tabindicator, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.tabindicator_img);
 
         imageView.setBackgroundResource(imgs[i]);
         TextView tv = (TextView) view.findViewById(R.id.tabindicator_tv);
         tv.setText(str_tabs[i]);
-
         return view;
     }
 
@@ -69,6 +72,10 @@ public class MainActivity extends BaseActivity{
         @Override
         public void onTabChanged(String s) {
            setTitle(s);
+            if(s.equals(Constants.STR_TAB_TWO)){
+                  LogTool.LogSave("TAG","s: " + s);
+                  int i = 5 / 0;
+            }
         }
     }
 }
