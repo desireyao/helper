@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.yaoh.helper.Dialog.ConfirmDialogFragment;
 import com.yaoh.helper.activities.BaseActivity;
 import com.yaoh.helper.constants.Constants;
 import com.yaoh.helper.fragments.FragmentTabOne;
@@ -40,7 +41,8 @@ public class MainActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-
+        ConfirmDialogFragment editNameDialog = new ConfirmDialogFragment();
+        editNameDialog.show(getFragmentManager(), "EditNameDialog");
     }
 
     @Override
@@ -72,10 +74,6 @@ public class MainActivity extends BaseActivity{
         @Override
         public void onTabChanged(String s) {
            setTitle(s);
-            if(s.equals(Constants.STR_TAB_TWO)){
-                  LogTool.LogSave("TAG","s: " + s);
-                  int i = 5 / 0;
-            }
         }
     }
 }

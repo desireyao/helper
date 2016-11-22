@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yaoh.helper.Dialog.ConfirmDialogFragment;
+
 /**
  * Created by yaoh on 2016/11/13.
  */
@@ -61,6 +63,12 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
+    public void showEditDialog(View view) {
+
+//        ConfirmDialogFragment editNameDialog = new ConfirmDialogFragment();
+//        editNameDialog.show(getFragmentManager(), "EditNameDialog");
+
+    }
 
     protected <T extends View> T findViewById(int id) {
         if (mRootView == null) {
