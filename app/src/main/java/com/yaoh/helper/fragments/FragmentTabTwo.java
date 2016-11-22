@@ -10,6 +10,7 @@ import com.yaoh.helper.R;
 
 public class FragmentTabTwo extends BaseFragment{
 
+
     @Override
     protected int setLayoutResouceId() {
         return R.layout.fragment_tab_two;
@@ -22,5 +23,12 @@ public class FragmentTabTwo extends BaseFragment{
 
     protected void initView() {
         super.initView();
+    }
+
+    private void init(){
+
+        for (int i = 0; i < 10; i ++){
+
+        }
     }
 }
