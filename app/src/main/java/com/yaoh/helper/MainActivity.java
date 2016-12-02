@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onTabChanged(String s) {
             setTitle(s);
-
+            //-------------------------------------------
             MessageEvent messageEvent = new MessageEvent();
             messageEvent.setCODE(100);
             EventBus.getDefault().post(messageEvent);
@@ -85,8 +85,6 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        LogTool.LogE(TAG, "MainActivity event.getCODE(): " + event.getCODE());
-    }
-
-    ;
+        LogTool.LogE(TAG, "MainActivit event.getCODE(): " + event.getCODE());
+    };
 }

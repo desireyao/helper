@@ -30,8 +30,6 @@ public class FragmentTabOne extends BaseFragment{
         super.initView();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-        LogTool.LogE(TAG,"FragmentTabOne event.getCODE(): " + event.getCODE());
-    };
+
+
 }
