@@ -18,6 +18,10 @@ import com.yaoh.helper.R;
  */
 public class ConfirmDialogFragment extends DialogFragment{
 
+    public ConfirmDialogFragment(){
+        setCancelable(false);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,25 +1,28 @@
 package com.yaoh.helper;
 
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.yaoh.helper.Dialog.ConfirmDialogFragment;
 import com.yaoh.helper.activities.BaseActivity;
 import com.yaoh.helper.constants.Constants;
 import com.yaoh.helper.fragments.FragmentTabOne;
 import com.yaoh.helper.fragments.FragmentTabTwo;
+import com.yaoh.helper.message.MessageEvent;
 import com.yaoh.helper.utils.LogTool;
 import com.yaoh.helper.widget.FragmentTabHost;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     private static String TAG = "MainActivity";
 
@@ -28,7 +31,7 @@ public class MainActivity extends BaseActivity{
 
     private List<Fragment> fragments = new ArrayList<>();
     private String[] str_tabs =
-            new String[]{Constants.STR_TAB_ONE,Constants.STR_TAB_TWO,Constants.STR_TAB_THR};
+            new String[]{Constants.STR_TAB_ONE, Constants.STR_TAB_TWO, Constants.STR_TAB_THR};
 
     private int imgs[] = new int[]{R.drawable.tab_one_selected,
             R.drawable.tab_two_selected,
@@ -41,8 +44,7 @@ public class MainActivity extends BaseActivity{
 
     @Override
     protected void initData() {
-        ConfirmDialogFragment editNameDialog = new ConfirmDialogFragment();
-        editNameDialog.show(getFragmentManager(), "EditNameDialog");
+
     }
 
     @Override
@@ -69,11 +71,22 @@ public class MainActivity extends BaseActivity{
         return view;
     }
 
-    class TabOnChangeListener implements TabHost.OnTabChangeListener{
+    class TabOnChangeListener implements TabHost.OnTabChangeListener {
 
         @Override
         public void onTabChanged(String s) {
-           setTitle(s);
+            setTitle(s);
+
+            MessageEvent messageEvent = new MessageEvent();
+            messageEvent.setCODE(100);
+            EventBus.getDefault().post(messageEvent);
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        LogTool.LogE(TAG, "MainActivity event.getCODE(): " + event.getCODE());
+    }
+
+    ;
 }
