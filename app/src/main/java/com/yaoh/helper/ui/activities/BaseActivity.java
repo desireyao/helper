@@ -1,4 +1,4 @@
-package com.yaoh.helper.activities;
+package com.yaoh.helper.ui.activities;
 
 import android.app.ProgressDialog;
 import android.os.Build;
@@ -10,8 +10,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yaoh.helper.R;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by yaoh on 2016/11/13.
@@ -25,7 +23,6 @@ public abstract  class BaseActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        EventBus.getDefault().register(this);
 
         initToolbar();
         initData();
@@ -60,7 +57,6 @@ public abstract  class BaseActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     protected void showWaitDialog(){

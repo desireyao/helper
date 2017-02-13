@@ -7,17 +7,15 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.yaoh.helper.activities.BaseActivity;
+import com.yaoh.helper.data.DBHelper;
+import com.yaoh.helper.ui.activities.BaseActivity;
 import com.yaoh.helper.constants.Constants;
-import com.yaoh.helper.fragments.FragmentTabOne;
-import com.yaoh.helper.fragments.FragmentTabTwo;
+import com.yaoh.helper.ui.fragments.FragmentTabOne;
+import com.yaoh.helper.ui.fragments.FragmentTabTwo;
 import com.yaoh.helper.message.MessageEvent;
-import com.yaoh.helper.utils.LogTool;
 import com.yaoh.helper.widget.FragmentTabHost;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +28,15 @@ public class MainActivity extends BaseActivity {
     private TabHost.TabSpec tabspec;
 
     private List<Fragment> fragments = new ArrayList<>();
-    private String[] str_tabs =
-            new String[]{Constants.STR_TAB_ONE, Constants.STR_TAB_TWO, Constants.STR_TAB_THR};
+    private String[] str_tabs = new String[]{Constants.STR_TAB_ONE,
+                         Constants.STR_TAB_TWO,
+                         Constants.STR_TAB_THR};
 
     private int imgs[] = new int[]{R.drawable.tab_one_selected,
             R.drawable.tab_two_selected,
             R.drawable.tab_thr_selected};
+
+    private DBHelper dbHelper;
 
     @Override
     protected int getLayoutId() {
@@ -44,7 +45,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        dbHelper = new DBHelper(this);
+        dbHelper.getWritableDatabase();
     }
 
     @Override
@@ -83,8 +85,4 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-        LogTool.LogE(TAG, "MainActivit event.getCODE(): " + event.getCODE());
-    };
 }

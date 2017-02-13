@@ -1,4 +1,4 @@
-package com.yaoh.helper.fragments;
+package com.yaoh.helper.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yaoh.helper.Dialog.ConfirmDialogFragment;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by yaoh on 2016/11/13.
@@ -26,13 +24,11 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = getActivity();
-        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBus.getDefault().unregister(this);
     }
 
     @Nullable
